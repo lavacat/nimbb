@@ -1,0 +1,172 @@
+<head>
+  <title>VistaPals</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="dankan" >
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container-fluid"> 
+    <a class="brand" href="#">VistaPals</a>     
+      <div class="nav-collapse">
+        <ul class="nav pull-right">
+
+ 
+          <!-- here comes the important part -->
+ 			{{>user_summary}}	
+ 				
+
+ 
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+		
+
+	<div class="modal hide wide-modal" id="myModal">
+
+     {{>player}}     
+
+</div>	
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3">
+			{{> topics}}
+        </div><!--/span-->
+        <div class="span9">
+          
+          {{> video_list}}
+
+        </div><!--/span-->
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+      </footer>
+
+    </div><!--/.fluid-container-->    
+    
+   
+          
+</body>
+
+<template name="user_summary">
+	{{#if loggedin}}
+		<a class="btn">
+              <i class="icon-user"></i>{{user_name}}
+      </a>
+   {{else}}
+   
+           <li class="dropdown" id="login-menu">
+             <a class="dropdown-toggle" data-toggle="dropdown" href="#menu1">
+               Login
+                <b class="caret"></b>
+             </a>
+             <div class="dropdown-menu">
+               <form style="margin: 0px" accept-charset="UTF-8" action="javascript:void(0);">
+                 <fieldset class='textbox' style="padding:10px">
+                   <input id="name" style="margin-top: 8px" type="text" placeholder="Username" />
+                   <input style="margin-top: 8px" type="password" placeholder="Passsword" />
+                   <input id="login" class="login btn-primary" name="commit" type="submit" value="Log In" />
+                 </fieldset>
+               </form>
+             </div>
+           </li>
+   {{/if}}
+</template>
+
+
+
+<template name="topics">
+ {{#if show}}	
+
+  <div id="topics" class="well sidebar-nav">
+  	<ul class="nav nav-list">
+  	 <li class="nav-header">Topics</li>
+    {{#each topics}}
+    	<li class="topic {{selected}}"><a href="javascript:void(0);">{{name}}</a></li>
+
+    {{/each}}
+    </ul>
+  </div>
+  <div id="createTopic">
+    <input type="text" id="new-topic" placeholder="New topic" />
+  </div>
+  {{/if}}
+</template>
+
+
+
+<template name="video_list">
+	{{#if show}}
+	<div class="well">
+	<div id="items-view" class = "row-fluid">
+  
+  		<ul id="video_list" class="nav nav-list span10">
+    		{{#each videos}}
+      		{{> video}}
+    		{{/each}}
+  		</ul>
+  		
+ 
+
+  	</div>
+		<div class="row-fluid">
+  		<p><input type="button" class="record btn btn-primary btn-danger btn-larg" value="Record" /></p>
+		</div>
+  		
+	
+	</div>
+	{{/if}}
+</template>
+
+<template name="video">
+	<li class="video well message">
+		{{datetime}} {{user_name}} <button class="btn btn-primary video_play_button">Play</button>
+  	</li>	
+</template>
+
+<template name="player">
+	{{#if show}}
+	
+
+  <div class="modal-header">
+    <button type="button" class="close close_player" data-dismiss="modal">×</button>
+    <h3>Video Player</h3>
+  </div>
+  <div class="modal-body wide-modal-body">
+			
+	<div class="row-fluid">
+		<div class="span8">
+			<object id="nimbb" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="640" height="480" codebase= "http://fpdownload.macromedia.com/get/flashplayer/current/swflash.cab">
+				<param name="movie" value="http://player.nimbb.com/nimbb.swf?mode=record&nologo=1&simplepage=1&key=2ede7186b4&lang=en" />
+				<param name="allowScriptAccess" value="always" />
+				<embed name="nimbb" src="http://player.nimbb.com/nimbb.swf?mode=record&nologo=1&simplepage=1&key=2ede7186b4&lang=en" width="640" height="480" allowScriptAccess="always" pluginspage="http://www.adobe.com/go/getflashplayer" type="application/x-shockwave-flash">
+				</embed>
+			</object>
+		</div>
+		<div class="span4">
+			<ul id="question_list"> 
+				{{#each questions}}
+      			{{> question}}
+    			{{/each}}
+    		</ul>
+    	</div>
+    </div>	
+	</div>
+</div>	
+	
+	{{/if}}
+</template>
+
+<template name="question">
+	<li class="question">
+		{{this}}
+  	</li>	
+</template>

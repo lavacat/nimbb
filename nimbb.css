@@ -1,0 +1,22 @@
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+      
+      .message {
+      	font-size: 18px;	
+      }
+      
+      .wide-modal-body {
+      	max-height: 500px;	
+      }
+		
+.wide-modal {
+ 
+    top: 20%;
+    width: 1000px;
+    margin: 0 0 0 -500px; /* -1 * (width / 2) */ 
+}
